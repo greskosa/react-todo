@@ -1,0 +1,12 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+.app {
+  padding: 20px;
+  text-align: left;
+  background-color: #282c34;
+  min-height: 100vh;
+  color: white;
+}
+
