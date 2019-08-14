@@ -4,6 +4,8 @@ import AddNewItem from '../components/AddNewItem/AddNewItem'
 import Loading from "../components/Loading/Loading";
 import {addItemAction, removeItemAction, checkItemAction, getTodoListAction} from "../actions";
 import connect from "react-redux/es/connect/connect";
+import  {LanguageContext} from '../context/l18n';
+
 
 class ToDoList extends React.Component{
     componentDidMount(){
@@ -11,11 +13,12 @@ class ToDoList extends React.Component{
     }
     render(){
        let {page, todoList, checkItem, addItem, removeItem} = this.props;
+       let l18n = this.context;
        return(
            <div>
                <div>{page.title}</div>
                <AddNewItem addBtn = {page.addBtn} addItem = {addItem} />
-               <Loading loading={page.loading}/>
+               <Loading loading={page.loading} l18n={l18n}/>
                <ul className = "todo-list">
                    {
                        todoList.items.map((item, index) =>
@@ -31,8 +34,6 @@ class ToDoList extends React.Component{
        )
     }
 }
-
-
 
 const mapStateToProps = (state) => {
     return {
@@ -53,6 +54,8 @@ const mapDispatchToProps = dispatch => ({
     getTodoList: ()=> dispatch(getTodoListAction())
 });
 
+ToDoList.contextType = LanguageContext;
+console.log(LanguageContext)
 export default connect(
     mapStateToProps,
     mapDispatchToProps
